@@ -4,8 +4,6 @@
 FROM bioconductor/bioconductor_docker:RELEASE_3_15
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
-USER root
-
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   libpq-dev \
@@ -21,7 +19,4 @@ RUN R -e "BiocManager::install(c('devtools'))" && \
   R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
 
 RUN R -e "BiocManager::install(c('Seurat'))"
-
-
-
 
