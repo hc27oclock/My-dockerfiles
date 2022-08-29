@@ -1,0 +1,27 @@
+# Let's try to maintain dockerfile here.
+# Last updated: 8/29/2022
+
+FROM bioconductor/bioconductor_docker:RELEASE_3_15
+LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
+
+USER root
+
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  libpq-dev \
+  gdal-bin \
+  libgdal-dev \
+  libudunits2-dev && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN R -e "BiocManager::install(c('devtools'))" && \
+  R -e "BiocManager::install(c('BiocGenerics', 'limma', 'DelayedArray', 'DelayedMatrixStats', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor'))" && \
+  R -e "devtools::install_github('cole-trapnell-lab/leidenbase')" && \
+  R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
+
+RUN R -e "BiocManager::install(c('Seurat'))"
+
+
+
+
