@@ -17,6 +17,11 @@ RUN apt-get update
 # for nloptr
 RUN apt-get install -y --no-install-recommends \
   cmake
+RUN apt-get update
+# for ggrastr
+RUN apt-get install -y --no-install-recommends \
+  libxt-dev libcairo2-dev
+RUN apt-get update
 # geospatial for monocle3 and Seurat
 RUN apt-get install -y --no-install-recommends \
   libpq-dev \
@@ -29,7 +34,7 @@ RUN apt-get clean && \
 
 RUN R -e "install.packages('devtools')"
 RUN R -e "install.packages('BiocManager')"
-# RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes'))"
+RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes'))"
 # RUN R -e "devtools::install_github('cole-trapnell-lab/leidenbase')"
 # RUN R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
 # RUN R -e "BiocManager::install(c('Seurat'))"
