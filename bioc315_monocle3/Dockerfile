@@ -5,38 +5,33 @@ FROM rocker/r-ver:4.2.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 RUN apt-get update && \
-  apt-get upgrade -y
-# for devtools
-RUN apt-get install -y --no-install-recommends \
+  apt-get upgrade -y && \
+  apt-get install -y --no-install-recommends \
+  # for devtools
   libgit2-dev \
   libfontconfig1-dev \
   libfreetype-dev \
   libfreetype6-dev \
   libharfbuzz-dev \
-  libfribidi-dev
-# for nloptr
-RUN apt-get install -y --no-install-recommends \
-  cmake
-# for ggrastr
-RUN apt-get install -y --no-install-recommends \
-  libxt-dev libcairo2-dev
-# linear programming for igraph
-RUN apt-get install -y --no-install-recommends \
-  libglpk-dev
-# geospatial for monocle3 and Seurat
-RUN apt-get install -y --no-install-recommends \
+  libfribidi-dev \
+  # for nloptr
+  cmake \
+  # for ggrastr
+  libxt-dev \
+  libcairo2-dev \
+  # linear programming for igraph
+  libglpk-dev \
+  # geospatial for monocle3 and Seurat
   libpq-dev \
   gdal-bin \
   libgdal-dev \
-  libudunits2-dev
-RUN apt-get clean && \
+  libudunits2-dev && \
+  apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN R -e "install.packages('devtools')"
-RUN R -e "install.packages('BiocManager')"
-RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes'))"
+RUN R -e "install.packages('devtools', 'BiocManager')"
+RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes', 'Seurat'))"
 RUN R -e "devtools::install_github('cole-trapnell-lab/leidenbase')"
 RUN R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
-RUN R -e "BiocManager::install(c('Seurat'))"
 
 
