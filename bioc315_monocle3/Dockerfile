@@ -29,9 +29,9 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN R -e "install.packages(c('devtools', 'BiocManager'))"
-RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes', 'Seurat'))"
-RUN R -e "devtools::install_github('cole-trapnell-lab/leidenbase')"
-RUN R -e "devtools::install_github('cole-trapnell-lab/monocle3')"
+RUN R -e "withCallingHandlers(install.packages(c('devtools', 'BiocManager')), warning=stop)"
+RUN R -e "withCallingHandlers(BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes', 'Seurat')), warning=stop)"
+RUN R -e "withCallingHandlers(devtools::install_github('cole-trapnell-lab/leidenbase'), warning=stop)"
+RUN R -e "withCallingHandlers(devtools::install_github('cole-trapnell-lab/monocle3'), warning=stop)"
 
 
