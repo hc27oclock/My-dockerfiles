@@ -7,6 +7,7 @@ LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
   # for devtools
+  libfontconfig1-dev \
   libgit2-dev \
   libfreetype-dev \
   libfreetype6-dev \
