@@ -20,6 +20,9 @@ RUN apt-get install -y --no-install-recommends \
 # for ggrastr
 RUN apt-get install -y --no-install-recommends \
   libxt-dev libcairo2-dev
+# linear programming for igraph
+RUN apt-get install -y --no-install-recommends \
+  libglpk-dev
 # geospatial for monocle3 and Seurat
 RUN apt-get install -y --no-install-recommends \
   libpq-dev \
