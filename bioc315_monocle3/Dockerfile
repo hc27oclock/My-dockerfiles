@@ -4,15 +4,23 @@
 FROM rocker/r-ver:4.2.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+  # for devtools
+  libgit2-dev \
+  libfreetype-dev \
+  libfreetype6-dev \
+  libharfbuzz-dev \
+  libfribidi-dev
+  # geospatial for monocle3 and Seurat
   libpq-dev \
   gdal-bin \
   libgdal-dev \
-  libudunits2-dev && \
-  apt-get clean && \
+  libudunits2-dev
+RUN apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+RUN R -e "install.packages('devtools')"
 RUN R -e "install.packages('BiocManager')"
 RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes'))"
 RUN R -e "BiocManager::install('cole-trapnell-lab/leidenbase')"
