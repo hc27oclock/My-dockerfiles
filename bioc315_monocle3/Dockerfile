@@ -14,6 +14,9 @@ RUN apt-get install -y --no-install-recommends \
   libharfbuzz-dev \
   libfribidi-dev
 RUN apt-get update
+# for nloptr
+RUN apt-get install -y --no-install-recommends \
+  cmake
 # geospatial for monocle3 and Seurat
 RUN apt-get install -y --no-install-recommends \
   libpq-dev \
