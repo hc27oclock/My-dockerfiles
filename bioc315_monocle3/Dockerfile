@@ -1,7 +1,7 @@
 # Let's try to maintain dockerfile here.
 # Last updated: 8/29/2022
 
-FROM bioconductor/bioconductor_docker:RELEASE_3_15
+FROM rocker/r-ver:4.2.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 RUN apt-get update && \
