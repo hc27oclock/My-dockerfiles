@@ -53,7 +53,7 @@ devtools_install_or_fail = function(package_name) {
   )
 }
 
-cran_install_or_fail(c("devtools", "BiocManager"))
+cran_install_or_fail(c("BiocManager", "devtools"))
 bioc_install_or_fail(c("BiocGenerics", "DelayedArray", "DelayedMatrixStats", "limma", "lme4", "S4Vectors", "SingleCellExperiment", "SummarizedExperiment", "batchelor", "ggrastr", "remotes", "Seurat"))
 devtools_install_or_fail("cole-trapnell-lab/leidenbase")
 devtools_install_or_fail("cole-trapnell-lab/monocle3")
