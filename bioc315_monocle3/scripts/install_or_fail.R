@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 cran_install_or_fail = function(package_name) {
   tryCatch({
-    install.packages(package_name, dependencies=T);
+    install.packages(package_name, dependencies=NA);
     library(package_name)},
     error=function(e) {print(e)},
     warning=function(w) {
@@ -19,7 +19,7 @@ cran_install_or_fail = function(package_name) {
 
 bioc_install_or_fail = function(package_name) {
   tryCatch({
-    BiocManager::install(package_name, dependencies=T);
+    BiocManager::install(package_name, dependencies=NA);
     library(package_name)},
     error=function(e) {print(e)},
     warning=function(w) {
@@ -37,7 +37,7 @@ bioc_install_or_fail = function(package_name) {
 
 devtools_install_or_fail = function(package_name) {
   tryCatch({
-    devtools::install_github(package_name, dependencies=T);
+    devtools::install_github(package_name, dependencies=NA);
     library(package_name)},
     error=function(e) {print(e)},
     warning=function(w) {
