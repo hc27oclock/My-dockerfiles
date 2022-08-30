@@ -14,8 +14,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 RUN R -e "install.packages('BiocManager')"
-RUN R -e "BiocManager::install(c('BiocGenerics', 'limma', 'remotes', 'DelayedArray', 'DelayedMatrixStats', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor'))"
+RUN R -e "BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats', 'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor', 'ggrastr', 'remotes'))"
 RUN R -e "BiocManager::install('cole-trapnell-lab/leidenbase')"
 RUN R -e "BiocManager::install('cole-trapnell-lab/monocle3')"
 RUN R -e "BiocManager::install(c('Seurat'))"
+
 
