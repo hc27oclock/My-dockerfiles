@@ -13,6 +13,7 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+RUN R -e "install.packages('BiocManager')"
 RUN R -e "BiocManager::install(c('devtools'))" && \
   R -e "BiocManager::install(c('BiocGenerics', 'limma', 'DelayedArray', 'DelayedMatrixStats', 'S4Vectors', 'SingleCellExperiment', 'SummarizedExperiment', 'batchelor'))" && \
   R -e "devtools::install_github('cole-trapnell-lab/leidenbase')" && \
