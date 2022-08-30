@@ -12,6 +12,7 @@ RUN apt-get install -y --no-install-recommends \
   libfreetype6-dev \
   libharfbuzz-dev \
   libfribidi-dev
+RUN apt-get install -y --no-install-recommends \
   # geospatial for monocle3 and Seurat
   libpq-dev \
   gdal-bin \
