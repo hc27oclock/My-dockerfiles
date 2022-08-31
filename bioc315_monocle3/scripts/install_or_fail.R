@@ -28,8 +28,7 @@ install_or_fail = function(package_name, pack="cran") {
 }
 
 install_or_fail(c("BiocManager", "devtools"), pack="cran")
-install_or_fail(c("BiocGenerics", "DelayedArray", "DelayedMatrixStats", "limma", "lme4", "S4Vectors", "SingleCellExperiment", "SummarizedExperiment", "batchelor", "ggrastr", "remotes"), pack="bioc")
+install_or_fail(c("BiocGenerics", "DelayedArray", "DelayedMatrixStats", "limma", "lme4", "S4Vectors", "SingleCellExperiment", "SummarizedExperiment", "batchelor", "ggrastr", "remotes", "Seurat"), pack="bioc")
 install_or_fail("cole-trapnell-lab/leidenbase", pack="devtools")
 install_or_fail("cole-trapnell-lab/monocle3", pack="devtools")
-install_or_fail("Seurat", pack="bioc")
 
