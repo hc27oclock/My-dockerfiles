@@ -1,15 +1,24 @@
 # Let's try to maintain dockerfile here.
-# Last updated: 8/30/2022
+# Last updated: 8/31/2022
 
 FROM rocker/r-ver:4.2.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
-USER root
-WORKDIR /opt
-
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
+  sudo
+
+ENV user choh
+RUN useradd -m -d /home/${user} ${user} && \
+  chown -R ${user} /home/${user} && \
+  adduser ${user} sudo && \
+  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER ${user}
+WORKDIR /home/${user}
+
+RUN sudo apt-get install -y --no-install-recommends \
   # for devtools
   libgit2-dev \
   libfontconfig1-dev \
@@ -33,5 +42,6 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
-RUN Rscript scripts/install_or_fail.R
+RUN chmod 777 scripts/install_or_fail.R
+RUN sudo Rscript scripts/install_or_fail.R
 
