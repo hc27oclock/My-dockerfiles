@@ -5,7 +5,6 @@ FROM rocker/r-ver:4.2.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 RUN apt-get update && \
-  apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
   sudo
 
@@ -18,7 +17,9 @@ RUN useradd -m -d /home/${user} ${user} && \
 USER ${user}
 WORKDIR /home/${user}
 
-RUN sudo apt-get install -y --no-install-recommends \
+RUN sudo apt-get update && \
+  sudo apt-get upgrade -y && \
+  sudo apt-get install -y --no-install-recommends \
   # for devtools
   libgit2-dev \
   libfontconfig1-dev \
@@ -38,8 +39,8 @@ RUN sudo apt-get install -y --no-install-recommends \
   gdal-bin \
   libgdal-dev \
   libudunits2-dev && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+  sudo apt-get clean && \
+  sudo rm -rf /var/lib/apt/lists/*
 
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
 RUN chmod 777 scripts/install_or_fail.R
