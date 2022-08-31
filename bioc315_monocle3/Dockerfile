@@ -4,6 +4,9 @@
 FROM rocker/r-ver:4.2.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
+USER root
+WORKDIR /opt
+
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
