@@ -43,6 +43,6 @@ RUN sudo apt-get update && \
   sudo rm -rf /var/lib/apt/lists/*
 
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
-RUN chmod 777 scripts/install_or_fail.R
 RUN sudo Rscript scripts/install_or_fail.R
+
 
