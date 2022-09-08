@@ -1,0 +1,17 @@
+name: base
+channels:
+  - pytorch
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - mamba=0.25.1
+  - conda=4.14.0
+  - python=3.10
+  - cudatoolkit=11.6.0
+  - pytorch=1.12.1
+  - scanpy=1.9.1
+  - scvi-tools=0.17.3
+  - pip:
+    - igraph==0.10.0  
+prefix: /opt/conda
