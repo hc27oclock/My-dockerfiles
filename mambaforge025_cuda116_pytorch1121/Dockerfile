@@ -4,6 +4,7 @@
 FROM mambaorg/micromamba:0.25.1-jammy-cuda-11.7.1
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
+USER root
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   sudo
