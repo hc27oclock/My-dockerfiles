@@ -33,6 +33,8 @@ RUN sudo apt-get update && \
 COPY environment.yml environment.yml
 RUN micromamba update -n base -y --file ./environment.yml
 
+ENV PATH="/opt/conda/bin:${PATH}"
+
 RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
 RUN conda clean -y --all
