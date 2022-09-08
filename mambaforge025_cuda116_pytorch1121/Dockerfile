@@ -31,10 +31,10 @@ RUN sudo apt-get update && \
   sudo rm -rf /var/lib/apt/lists/*
 
 COPY environment.yml environment.yml
-RUN micromamba update -n base -y --file ./environment.yml && \
-  conda clean -y --all
+RUN micromamba update -n base -y --file ./environment.yml
 
 RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
+RUN conda clean -y --all
 
 CMD ["/opt/conda/bin/python"]
