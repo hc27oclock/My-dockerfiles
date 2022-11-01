@@ -45,6 +45,12 @@ RUN sudo apt-get upgrade -y && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 
+# Install mamba version 0.24.0, python version 3.11
+RUN curl micro.mamba.pm/install.sh | bash
+RUN micromamba activate
+RUN micromamba install -c conda-forge python=3.11 scanpy
+RUN micromamba install -c bioconda nextflow
+
 # Installing necessary R packages in a modular script.
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
 RUN sudo Rscript scripts/install_or_fail.R
