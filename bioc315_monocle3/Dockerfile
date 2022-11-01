@@ -1,9 +1,11 @@
 # Let's try to maintain dockerfile here.
-# Last updated: 8/31/2022
+# Last updated: 11/1/2022
 
-FROM rocker/r-ver:4.2.1
+# R 4.2.2 was released on 10/31/2022.
+FROM rocker/r-ver:4.2.2
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
+# install sudo
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   sudo
@@ -17,8 +19,9 @@ RUN useradd -m -d /home/${user} ${user} && \
 USER ${user}
 WORKDIR /home/${user}
 
-RUN sudo apt-get update && \
-  sudo apt-get upgrade -y && \
+# Required apt packages for Seurat, monocle3
+RUN sudo apt-get upgrade -y && \
+  sudo apt-get update && \
   sudo apt-get install -y --no-install-recommends \
   # for devtools
   libgit2-dev \
@@ -42,6 +45,7 @@ RUN sudo apt-get update && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 
+# Installing necessary R packages in a modular script.
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
 RUN sudo Rscript scripts/install_or_fail.R
 
