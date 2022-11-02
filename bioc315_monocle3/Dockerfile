@@ -30,6 +30,9 @@ RUN sudo apt-get upgrade -y && \
   libfreetype6-dev \
   libharfbuzz-dev \
   libfribidi-dev \
+  # for mamba
+  libcurl-dev \
+  libcurl4-openssl-dev \
   # for nloptr
   cmake \
   # for ggrastr
@@ -47,8 +50,9 @@ RUN sudo apt-get upgrade -y && \
 
 # Install mamba version 0.24.0, python version 3.10
 RUN curl micro.mamba.pm/install.sh | bash
+RUN export MAMBA_ROOT_PREFIX=/home/choh/micromamba2
 RUN eval "$(~/.local/bin/micromamba shell hook -s posix)"
-RUN ~/.local/bin/micromamba shell init -s bash -p ~/.local/bin/micromamba
+RUN ~/.local/bin/micromamba shell init -s bash -p /home/choh/micromamba2
 RUN source ~/.bashrc
 
 RUN ~/.local/bin/micromamba activate
