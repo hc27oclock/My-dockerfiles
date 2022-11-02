@@ -47,9 +47,13 @@ RUN sudo apt-get upgrade -y && \
 
 # Install mamba version 0.24.0, python version 3.10
 RUN curl micro.mamba.pm/install.sh | bash
+RUN eval "$(./bin/micromamba shell hook -s posix)"
+RUN ./bin/micromamba shell init -s bash -p ~/micromamba
+RUN source ~/.bashrc
+
 RUN micromamba activate
 RUN micromamba install -c conda-forge python=3.10 scanpy
-RUN micromamba install -c bioconda nextflow
+RUN micromamba install -c bioconda nextflow bowtie2 trimmomatic star macs2
 
 # Installing necessary R packages in a modular script.
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
