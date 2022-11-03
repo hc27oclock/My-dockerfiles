@@ -53,14 +53,14 @@ RUN sudo apt-get upgrade -y && \
   sudo rm -rf /var/lib/apt/lists/*
 
 # Install mamba version 0.24.0, python version 3.10
-RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-ENV MAMBA_ROOT_PREFIX=~/micromamba
-RUN eval "$(./bin/micromamba shell hook -s posix)"
-RUN ./bin/micromamba shell init -s bash -p ~/micromamba
-RUN . "~/.bashrc"
-RUN micromamba activate && \
-  micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy && \
-  micromamba install -y -c bioconda nextflow bowtie2 trimmomatic star macs2
+#RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+#ENV MAMBA_ROOT_PREFIX=~/micromamba
+#RUN eval "$(./bin/micromamba shell hook -s posix)"
+#RUN ./bin/micromamba shell init -s bash -p ~/micromamba
+#RUN . "~/.bashrc"
+#RUN micromamba activate && \
+#  micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy && \
+#  micromamba install -y -c bioconda nextflow bowtie2 trimmomatic star macs2
 
 # Installing necessary R packages in a modular script.
 #COPY scripts/install_or_fail.R scripts/install_or_fail.R
