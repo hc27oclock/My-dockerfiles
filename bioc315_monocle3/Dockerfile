@@ -57,8 +57,8 @@ SHELL ["/bin/bash", "-c", "~/.local/bin/micromamba shell init -s bash -p /home/c
 SHELL ["/bin/bash", "-c", "source ~/.bashrc"]
 
 RUN micromamba activate
-RUN micromamba install -c conda-forge coreutils python=3.10 openjdk curl scanpy
-RUN micromamba install -c bioconda nextflow bowtie2 trimmomatic star macs2
+RUN micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy
+RUN micromamba install -y -c bioconda nextflow bowtie2 trimmomatic star macs2
 
 # Installing necessary R packages in a modular script.
 COPY scripts/install_or_fail.R scripts/install_or_fail.R
