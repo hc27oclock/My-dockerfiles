@@ -32,7 +32,6 @@ RUN sudo apt-get upgrade -y && \
   libfribidi-dev \
   # for mamba
   curl \
-  libcurl-dev \
   libcurl4-openssl-dev \
   # for nloptr
   cmake \
