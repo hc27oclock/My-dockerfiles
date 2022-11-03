@@ -52,7 +52,7 @@ RUN sudo apt-get upgrade -y && \
 # Install mamba version 0.24.0, python version 3.10
 SHELL ["/bin/bash", "-c", "curl micro.mamba.pm/install.sh | bash"]
 SHELL ["/bin/bash", "-c", "export MAMBA_ROOT_PREFIX=/home/choh/micromamba"]
-SHELL ["/bin/bash", "-c", 'eval "$(~/.local/bin/micromamba shell hook -s posix)"']
+SHELL ["/bin/bash", "-c", "eval \"$(~/.local/bin/micromamba shell hook -s posix)\""]
 SHELL ["/bin/bash", "-c", "~/.local/bin/micromamba shell init -s bash -p /home/choh/micromamba"]
 SHELL ["/bin/bash", "-c", "source ~/.bashrc"]
 
