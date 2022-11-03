@@ -1,12 +1,12 @@
 # Let's try to maintain dockerfile here.
-# Last updated: 11/1/2022
+# Last updated: 11/3/2022
 
 # R 4.2.2 was released on 10/31/2022.
 FROM rocker/r-ver:4.2.2
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 # bash shell
-SHELL ["/bin/bash", "-c"] 
+SHELL ["/bin/bash", "-c"]
 
 # install sudo
 RUN apt-get update && \
@@ -53,12 +53,10 @@ RUN sudo apt-get upgrade -y && \
   sudo rm -rf /var/lib/apt/lists/*
 
 # Install mamba version 0.24.0, python version 3.10
-RUN curl micro.mamba.pm/install.sh | bash
-RUN export CONDA_PREFIX=/home/choh/micromamba
-RUN export MAMBA_ROOT_PREFIX=/home/choh/micromamba
-RUN eval "$(~/.local/bin/micromamba shell hook -s posix)"
-# RUN source /home/choh/micromamba/etc/profile.d/micromamba.sh
-RUN ~/.local/bin/micromamba shell init -s bash -p ~/micromamba
+RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+RUN export MAMBA_ROOT_PREFIX=~/micromamba
+RUN eval "$(./bin/micromamba shell hook -s posix)"
+RUN ./bin/micromamba shell init -s bash -p ~/micromamba
 RUN source ~/.bashrc
 
 RUN micromamba activate
