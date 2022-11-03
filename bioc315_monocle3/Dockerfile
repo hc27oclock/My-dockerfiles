@@ -58,7 +58,7 @@ ENV MAMBA_ROOT_PREFIX=~/micromamba
 RUN eval "$(./bin/micromamba shell hook -s posix)"
 RUN ./bin/micromamba shell init -s bash -p ~/micromamba
 
-RUN source "~/.bashrc"
+RUN source ~/.bashrc
 ENV PATH=~/micromamba/bin:$PATH
 
 RUN micromamba activate && \
