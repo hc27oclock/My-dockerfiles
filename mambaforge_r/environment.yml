@@ -19,4 +19,5 @@ dependencies:
   - r-devtools=2.4.5
   - r-dplyr=1.0.10
   - r-ggrepel=0.9.1
+  - r-pheatmap=1.0.12
 prefix: /opt/conda
