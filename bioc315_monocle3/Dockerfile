@@ -57,16 +57,16 @@ RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bi
 RUN export MAMBA_ROOT_PREFIX=~/micromamba
 RUN eval "$(./bin/micromamba shell hook -s posix)"
 RUN ./bin/micromamba shell init -s bash -p ~/micromamba
-RUN echo $PATH
+CMD ["/bin/bash", "-c"]
 RUN source ~/.bashrc
-RUN echo $PATH
 
-RUN micromamba activate
-RUN micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy
-RUN micromamba install -y -c bioconda nextflow bowtie2 trimmomatic star macs2
+
+#RUN micromamba activate
+#RUN micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy
+#RUN micromamba install -y -c bioconda nextflow bowtie2 trimmomatic star macs2
 
 # Installing necessary R packages in a modular script.
-COPY scripts/install_or_fail.R scripts/install_or_fail.R
-RUN sudo Rscript scripts/install_or_fail.R
+#COPY scripts/install_or_fail.R scripts/install_or_fail.R
+#RUN sudo Rscript scripts/install_or_fail.R
 
 
