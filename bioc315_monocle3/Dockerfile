@@ -50,6 +50,7 @@ RUN sudo apt-get upgrade -y && \
   sudo rm -rf /var/lib/apt/lists/*
 
 # Install mamba version 0.24.0, python version 3.10
+RUN bash
 RUN curl micro.mamba.pm/install.sh | bash
 RUN export MAMBA_ROOT_PREFIX=/home/choh/micromamba
 RUN eval "$(~/.local/bin/micromamba shell hook -s posix)"
