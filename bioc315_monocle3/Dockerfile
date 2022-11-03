@@ -59,7 +59,7 @@ RUN eval "$(./bin/micromamba shell hook -s bash)"
 #RUN ./bin/micromamba activate
 
 RUN ./bin/micromamba shell init -s bash -p ~/micromamba
-RUN ["source", "~/.bashrc"]
+RUN ~/.bashrc
 ENV PATH=~/bin:~/micromamba/bin:$PATH
 
 RUN micromamba activate && \
