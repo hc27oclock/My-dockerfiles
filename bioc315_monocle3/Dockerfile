@@ -56,8 +56,9 @@ RUN sudo apt-get upgrade -y && \
 RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
 ENV MAMBA_ROOT_PREFIX=~/micromamba
 RUN eval "$(./bin/micromamba shell hook -s bash)"
-RUN ./bin/micromamba shell init -s bash -p ~/micromamba
+RUN ./bin/micromamba activate
 
+RUN ./bin/micromamba shell init -s bash -p ~/micromamba
 RUN source ~/.bashrc
 ENV PATH=~/bin:~/micromamba/bin:$PATH
 
