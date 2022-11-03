@@ -39,4 +39,7 @@ RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
 RUN conda clean -y --all
 
+COPY install_r_packages.R install_r_packages.R
+RUN sudo Rscript install_r_packages.R
+
 CMD ["/bin/bash"]
