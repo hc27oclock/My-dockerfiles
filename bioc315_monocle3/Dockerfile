@@ -31,6 +31,7 @@ RUN sudo apt-get upgrade -y && \
   libharfbuzz-dev \
   libfribidi-dev \
   # for mamba
+  bzip2 \
   curl \
   libcurl4-openssl-dev \
   # for nloptr
