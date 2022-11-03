@@ -15,4 +15,8 @@ dependencies:
   - picard=2.27.4
   - star=2.7.10b
   - macs2=2.2.7.1
+  - r-biocmanager=1.30.19
+  - r-devtools=2.4.5
+  - r-dplyr=1.0.10
+  - r-ggrepel=0.9.1
 prefix: /opt/conda
