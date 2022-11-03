@@ -59,11 +59,11 @@ RUN eval "$(./bin/micromamba shell hook -s posix)"
 RUN ./bin/micromamba shell init -s bash -p ~/micromamba
 
 RUN source ~/.bashrc
-ENV PATH=~/micromamba/bin:$PATH
+#ENV PATH=~/micromamba/bin:$PATH
 
-RUN micromamba activate && \
-  micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy && \
-  micromamba install -y -c bioconda nextflow
+RUN ~/micromamba/bin/micromamba activate && \
+  ~/micromamba/bin/micromamba install -y -c conda-forge coreutils python=3.10 openjdk curl scanpy && \
+  ~/micromamba/bin/micromamba install -y -c bioconda nextflow
   # bowtie2 trimmomatic star macs2
 
 # Installing necessary R packages in a modular script.
