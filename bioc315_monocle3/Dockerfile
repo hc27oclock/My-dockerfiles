@@ -56,7 +56,8 @@ RUN sudo apt-get upgrade -y && \
 RUN curl micro.mamba.pm/install.sh | bash
 RUN export MAMBA_ROOT_PREFIX=/home/choh/micromamba
 RUN eval "$(~/.local/bin/micromamba shell hook -s posix)"
-RUN source /home/choh/micromamba/etc/profile.d/micromamba.sh
+# RUN source /home/choh/micromamba/etc/profile.d/micromamba.sh
+RUN ~/.local/bin/micromamba shell init -s bash -p ~/micromamba
 RUN source ~/.bashrc
 
 RUN micromamba activate
