@@ -21,6 +21,7 @@ WORKDIR /home/${user}
 RUN sudo apt-get update -y --no-install-recommends && \
   sudo apt-get upgrade -y --no-install-recommends && \
   sudo apt-get install -y --no-install-recommends \
+  git \
   libgit2-dev \
   wget \
   unzip \
