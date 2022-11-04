@@ -44,6 +44,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   r-cran-tidyverse \
   r-cran-ggrepel \
   r-cran-pheatmap \
+  r-cran-seurat \
   r-cran-biocmanager \
   r-bioc-all \
   r-bioc-bsgenome \
