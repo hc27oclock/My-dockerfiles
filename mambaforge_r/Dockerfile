@@ -31,6 +31,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
+RUN export DEBIAN_FRONTEND=interactive
 RUN sudo DEBIAN_FRONTEND=noninteractive sudo apt-get install -y tzdata
 
 # GPG settings
