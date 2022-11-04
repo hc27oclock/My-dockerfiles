@@ -18,7 +18,7 @@ RUN useradd -m -d /home/${user} ${user} && \
 USER ${user}
 WORKDIR /home/${user}
 
-RUN sudo apt-get update && \
+RUN sudo apt-get update -y && \
   sudo apt-get upgrade -y && \
   sudo apt-get install -y --no-install-recommends \
   libgit2-dev \
@@ -37,7 +37,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-proj
 
 # The current /bin/R might conflict with /opt/conda/bin/R.
 RUN sudo apt-get update -y && \
-  sudo apt-get install -y --no-install-recommdends \
+  sudo apt-get install -y --no-install-recommends \
   r-base \
   r-cran-devtools \
   r-cran-xml \
