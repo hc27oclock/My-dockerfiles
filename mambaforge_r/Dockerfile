@@ -41,6 +41,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   r-base \
   r-cran-devtools \
   r-cran-xml \
+  r-cran-openxlsx \
   r-cran-tidyverse \
   r-cran-ggrepel \
   r-cran-pheatmap \
