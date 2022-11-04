@@ -35,6 +35,8 @@ RUN sudo apt-get update -y && \
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ America/New_York
 # The current /bin/R might conflict with /opt/conda/bin/R.
 RUN sudo apt-get update -y && \
   sudo apt-get install -y --no-install-recommends \
