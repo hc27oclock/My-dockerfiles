@@ -29,6 +29,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   build-essential \
   ca-certificates
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN DEBIAN_FRONTEND=noninteractive TZ="America/New_York" sudo apt-get install -y --no-install-recommends tzdata
 
 # GPG settings
