@@ -1,5 +1,5 @@
 # Let's try to maintain dockerfile here.
-# Last updated: 11/3/2022
+# Last updated: 11/4/2022
 
 FROM mambaorg/micromamba:1.0.0-jammy
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
@@ -36,7 +36,8 @@ RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc |
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 # The current /bin/R might conflict with /opt/conda/bin/R.
-RUN DEBIAN_FRONTEND=noninteractive TZ=America/New_York sudo apt-get update -y && \
+RUN sudo apt-get update -y
+RUN DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" \
   sudo apt-get install -y --no-install-recommends \
   r-base \
   r-cran-devtools \
@@ -51,6 +52,11 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=America/New_York sudo apt-get update -y &&
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 
+# Installing R packages not available in binary
+COPY install_r_packages.R install_r_packages.R
+RUN Rscript install_r_packages.R
+
+# Now, installing python using mamba. Hopefully this does not make conflicts for macs2.
 COPY environment.yml environment.yml
 RUN micromamba update -n base -y --file ./environment.yml
 
@@ -59,9 +65,5 @@ ENV PATH="${PATH}:/opt/conda/bin"
 RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
 RUN conda clean -y --all
-
-# Installing R packages not available in binary
-COPY install_r_packages.R install_r_packages.R
-RUN Rscript install_r_packages.R
 
 CMD ["/bin/bash"]
