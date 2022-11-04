@@ -29,8 +29,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   build-essential \
   ca-certificates
 
-ARG DEBIAN_FRONTEND=noninteractive
-RUN DEBIAN_FRONTEND=noninteractive sudo apt-get install -y tzdata
+RUN sudo DEBIAN_FRONTEND=noninteractive sudo TZ="America/New_York" sudo apt-get install -y --no-install-recommends tzdata
 
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
