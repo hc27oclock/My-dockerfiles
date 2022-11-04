@@ -23,6 +23,7 @@ RUN sudo apt-get update && \
   sudo apt-get install -y --no-install-recommends \
   libgit2-dev \
   wget \
+  gpg \
   unzip \
   bzip2 \
   build-essential \
@@ -30,15 +31,36 @@ RUN sudo apt-get update && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 
+# GPG settings
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
+
+# The current /bin/R might conflict with /opt/conda/bin/R.
+RUN sudo apt-get update -y && \
+  sudo apt-get install -y --no-install-recommdends \
+  r-base \
+  r-cran-devtools \
+  r-cran-xml \
+  r-cran-tidyverse \
+  r-cran-ggrepel \
+  r-cran-pheatmap \
+  r-cran-biocmanager \
+  r-bioc-all \
+  r-bioc-bsgenome \
+  r-bioc-deseq2 && \
+  sudo apt-get clean && \
+  sudo rm -rf /var/lib/apt/lists/*
+
 COPY environment.yml environment.yml
 RUN micromamba update -n base -y --file ./environment.yml
 
-ENV PATH="/opt/conda/bin:${PATH}"
+ENV PATH="${PATH}:/opt/conda/bin"
 
 RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
 RUN conda clean -y --all
 
+# Installing R packages not available in binary
 COPY install_r_packages.R install_r_packages.R
 RUN Rscript install_r_packages.R
 
