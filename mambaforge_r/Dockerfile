@@ -53,7 +53,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
 
 # Installing R packages not available in binary
 COPY install_r_packages.R install_r_packages.R
-RUN Rscript install_r_packages.R
+RUN sudo Rscript install_r_packages.R
 
 # Now, installing python using mamba. Hopefully this does not make conflicts for macs2.
 COPY environment.yml environment.yml
