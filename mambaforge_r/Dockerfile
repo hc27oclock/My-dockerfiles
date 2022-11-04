@@ -18,26 +18,27 @@ RUN useradd -m -d /home/${user} ${user} && \
 USER ${user}
 WORKDIR /home/${user}
 
-RUN sudo apt-get update -y && \
-  sudo apt-get upgrade -y && \
+RUN sudo apt-get update -y --no-install-recommends && \
+  sudo apt-get upgrade -y --no-install-recommends && \
   sudo apt-get install -y --no-install-recommends \
   libgit2-dev \
   wget \
-  gpg \
   unzip \
   bzip2 \
+  gpg \
   build-essential \
-  ca-certificates && \
-  sudo apt-get clean && \
-  sudo rm -rf /var/lib/apt/lists/*
+  ca-certificates
+
+RUN DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" \
+  sudo apt-get install -y --no-install-recommends \
+  tzdata
 
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 # The current /bin/R might conflict with /opt/conda/bin/R.
-RUN sudo apt-get update -y --no-install-recommends
-RUN DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" \
+RUN sudo apt-get update -y --no-install-recommends && \
   sudo apt-get install -y --no-install-recommends \
   r-base \
   r-cran-devtools \
