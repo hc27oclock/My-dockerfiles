@@ -36,7 +36,7 @@ RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc |
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 # The current /bin/R might conflict with /opt/conda/bin/R.
-RUN sudo apt-get update -y
+RUN sudo apt-get update -y --no-install-recommends
 RUN DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" \
   sudo apt-get install -y --no-install-recommends \
   r-base \
