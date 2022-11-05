@@ -51,6 +51,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   r-cran-ggrepel \
   r-cran-pheatmap \
   r-cran-igraph \
+  r-cran-testthat \
   r-cran-seurat \
   r-cran-biocmanager \
   r-bioc-all \
