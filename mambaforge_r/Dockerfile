@@ -68,8 +68,6 @@ RUN sudo Rscript install_r_packages.R
 COPY environment.yml environment.yml
 RUN micromamba update -n base -y --file ./environment.yml
 
-ENV PATH="${PATH}:/opt/conda/bin"
-
 RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
 RUN conda clean -y --all
