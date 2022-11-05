@@ -77,6 +77,8 @@ RUN sudo apt-get update -y --no-install-recommends && \
 COPY install_r_packages.R install_r_packages.R
 RUN sudo Rscript install_r_packages.R
 
+ENV PATH="${PATH}:/opt/conda/bin"
+
 # Now, installing python using mamba. Hopefully this does not make conflicts for macs2.
 COPY environment.yml environment.yml
 RUN micromamba update -n base -y --file ./environment.yml
