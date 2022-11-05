@@ -27,6 +27,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   unzip \
   bzip2 \
   gpg \
+  gfortran \
   build-essential \
   ca-certificates
 
