@@ -30,6 +30,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   gfortran \
   liblapack-dev \
   libopenblas-dev \
+  libudunits2-dev \
   build-essential \
   ca-certificates
 
