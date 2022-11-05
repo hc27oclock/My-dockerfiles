@@ -31,6 +31,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   liblapack-dev \
   libopenblas-dev \
   libudunits2-dev \
+  libfontconfig1-dev \
   build-essential \
   ca-certificates
 
