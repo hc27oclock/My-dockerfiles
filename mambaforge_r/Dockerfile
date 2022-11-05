@@ -50,6 +50,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   r-cran-openxlsx \
   r-cran-tidyverse \
   r-cran-rcurl \
+  r-cran-nloptr \
   r-cran-ggrepel \
   r-cran-pheatmap \
   r-cran-seurat \
