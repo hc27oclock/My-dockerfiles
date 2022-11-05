@@ -28,6 +28,8 @@ RUN sudo apt-get update -y --no-install-recommends && \
   bzip2 \
   gpg \
   gfortran \
+  liblapack-dev \
+  libopenblas-dev \
   build-essential \
   ca-certificates
 
