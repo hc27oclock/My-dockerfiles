@@ -27,6 +27,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   unzip \
   bzip2 \
   gpg \
+  cmake \
   gfortran \
   liblapack-dev \
   libopenblas-dev \
