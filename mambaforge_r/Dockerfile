@@ -43,7 +43,7 @@ RUN sudo apt-get update -y --no-install-recommends && \
   libpq-dev \
   gdal-bin \
   libgdal-dev \
-  libudunits2-dev
+  libudunits2-dev \
   build-essential \
   ca-certificates
 
