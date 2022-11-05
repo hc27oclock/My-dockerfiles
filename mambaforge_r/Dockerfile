@@ -27,12 +27,23 @@ RUN sudo apt-get update -y --no-install-recommends && \
   unzip \
   bzip2 \
   gpg \
-  cmake \
   gfortran \
+  libfontconfig1-dev \
   liblapack-dev \
   libopenblas-dev \
+  # for nloptr
   libudunits2-dev \
-  libfontconfig1-dev \
+  cmake \
+  # for ggrastr
+  libxt-dev \
+  libcairo2-dev \
+  # linear programming for igraph
+  libglpk-dev \
+  # geospatial for monocle3 and Seurat
+  libpq-dev \
+  gdal-bin \
+  libgdal-dev \
+  libudunits2-dev
   build-essential \
   ca-certificates
 
