@@ -9,7 +9,8 @@ RUN apt-get update -qq -y --no-install-recommends && \
   apt-get install -qq -y --no-install-recommends \
   sudo \
   wget \
-  gpg
+  gpg \
+  ca-certificates
 
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
