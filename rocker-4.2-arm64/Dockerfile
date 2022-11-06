@@ -32,7 +32,7 @@ ENV CRAN=https://packagemanager.rstudio.com/cran/__linux__/jammy/latest
 ENV LANG=en_US.UTF-8
 
 COPY scripts rocker_scripts
-RUN curl -s -o R4.2.2.tar.gz https://github.com/rocker-org/rocker-versioned2/archive/refs/tags/R4.2.2.tar.gz && \
+RUN curl -s -o R4.2.2.tar.gz https://api.github.com/repos/rocker-org/rocker-versioned2/releases/latest && \
   tar zxvf R4.2.2.tar.gz
 
 RUN rocker-versioned2-R4.2.2/scripts/install_R_source.sh
