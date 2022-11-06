@@ -35,11 +35,11 @@ ENV LANG=en_US.UTF-8
 
 COPY scripts rocker_scripts
 
-RUN sudo wget -qO rocker_scripts/install_R_source.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh && \
+RUN sudo wget -cqO rocker_scripts/install_R_source.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh && \
   bash rocker_scripts/install_R_source.sh
-RUN sudo wget -qO rocker_scripts/install_geospatial.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh && \
+RUN sudo wget -cqO rocker_scripts/install_geospatial.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh && \
   bash rocker_scripts/install_geospatial.sh
-RUN sudo wget -qO rocker_scripts/setup_R.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh && \
+RUN sudo wget -cqO rocker_scripts/setup_R.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh && \
   bash rocker_scripts/setup_R.sh
 
 RUN sudo apt-get update && \
