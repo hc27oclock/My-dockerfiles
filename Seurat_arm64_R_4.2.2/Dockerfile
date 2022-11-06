@@ -8,6 +8,7 @@ USER root
 RUN apt-get update -qq -y --no-install-recommends && \
   apt-get install -qq -y --no-install-recommends \
   sudo \
+  gpg \
   lsb-core \
   software-properties-common \
   dirmngr
