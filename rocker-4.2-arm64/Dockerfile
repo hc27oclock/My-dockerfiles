@@ -23,7 +23,6 @@ RUN useradd -m -d /home/${user} ${user} && \
   adduser ${user} sudo && \
   echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-USER ${user}
 WORKDIR /home/${user}
 
 ENV R_VERSION=4.2.2
@@ -34,23 +33,19 @@ ENV CRAN=https://packagemanager.rstudio.com/cran/__linux__/jammy/latest
 ENV LANG=en_US.UTF-8
 
 COPY scripts rocker_scripts
+RUN git clone https://github.com/rocker-org/rocker-versioned2.git
 
-RUN curl -s -o rocker_scripts/install_R_source.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh
-RUN curl -s -o rocker_scripts/install_geospatial.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh
-RUN curl -s -o rocker_scripts/setup_R.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh
-# && \
-#  rocker_scripts/install_R_source.sh
-# && \
-#  rocker_scripts/install_geospatial.sh
-# && \
-#  rocker_scripts/setup_R.sh
+RUN rocker_versioned2/scripts/install_R_source.sh
+RUN rocker_versioned2/scripts/install_geospatial.sh
+RUN rocker_versioned2/scripts/setup_R.sh
 
+RUN apt-get update && \
+  apt-get install -y libcurl4-openssl-dev libssl-dev zlib1g-dev libpng-dev libgeos-dev && \
+  apt-get autoremove -y && \
+  apt-get autoclean -y
 
-RUN sudo apt-get update && \
-  sudo apt-get install -y libcurl4-openssl-dev libssl-dev zlib1g-dev libpng-dev libgeos-dev && \
-  sudo apt-get autoremove -y && \
-  sudo apt-get autoclean -y
+RUN Rscript rocker_scripts/install_seurat.R
 
-#RUN sudo Rscript rocker_scripts/install_seurat.R
+USER ${user}
 
 CMD ["R"]
