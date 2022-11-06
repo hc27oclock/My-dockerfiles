@@ -9,6 +9,10 @@ LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
       org.opencontainers.image.authors="Carl Boettiger <cboettig@ropensci.org>"
 
 USER root
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  sudo
+
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
   chown -R ${user} /home/${user} && \
