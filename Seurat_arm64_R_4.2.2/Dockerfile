@@ -25,8 +25,8 @@ RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc |
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
-RUN apt-get update -qq -y && \
-  apt-get install -qq -y \
+RUN apt-get upgrade -y && \
+  apt-get install -y \
   r-base \
   r-cran-seurat && \
   sudo apt-get clean && \
