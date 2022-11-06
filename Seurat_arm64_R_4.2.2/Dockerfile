@@ -17,11 +17,9 @@ RUN useradd -m -d /home/${user} ${user} && \
 
 WORKDIR /home/${user}
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
-
 RUN apt-get update -y --no-install-recommends && \
   apt-get install -y --no-install-recommends \
-  r-base-core \
+  r-base \
   r-cran-seurat && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
