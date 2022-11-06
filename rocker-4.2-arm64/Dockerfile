@@ -14,7 +14,7 @@ RUN apt-get update && \
   sudo \
   wget \
   curl \
-  libcurl-openssl-dev
+  libcurl4-openssl-dev
 
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
