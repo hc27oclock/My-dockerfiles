@@ -35,18 +35,22 @@ ENV LANG=en_US.UTF-8
 
 COPY scripts rocker_scripts
 
-RUN curl -s -o rocker_scripts/install_R_source.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh && \
-  rocker_scripts/install_R_source.sh
-RUN curl -s -o rocker_scripts/install_geospatial.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh && \
-  rocker_scripts/install_geospatial.sh
-RUN curl -s -o rocker_scripts/setup_R.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh && \
-  rocker_scripts/setup_R.sh
+RUN curl -s -o rocker_scripts/install_R_source.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh
+RUN curl -s -o rocker_scripts/install_geospatial.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh
+RUN curl -s -o rocker_scripts/setup_R.sh https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh
+# && \
+#  rocker_scripts/install_R_source.sh
+# && \
+#  rocker_scripts/install_geospatial.sh
+# && \
+#  rocker_scripts/setup_R.sh
+
 
 RUN sudo apt-get update && \
   sudo apt-get install -y libcurl4-openssl-dev libssl-dev zlib1g-dev libpng-dev libgeos-dev && \
   sudo apt-get autoremove -y && \
   sudo apt-get autoclean -y
 
-RUN sudo Rscript rocker_scripts/install_seurat.R
+#RUN sudo Rscript rocker_scripts/install_seurat.R
 
 CMD ["R"]
