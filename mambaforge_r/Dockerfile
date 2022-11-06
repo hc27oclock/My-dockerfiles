@@ -77,7 +77,9 @@ RUN sudo apt-get update -y --no-install-recommends && \
   sudo rm -rf /var/lib/apt/lists/*
 
 # Installing R packages not available in binary
-RUN sudo R CMD INSTALL https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz
+RUN wget -c https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz && \
+  sudo R CMD INSTALL Matrix.utils_0.9.8.tar.gz && \
+  rm Matrix.utils_0.9.8.tar.gz
 
 COPY install_r_packages.R install_r_packages.R
 RUN sudo Rscript install_r_packages.R
