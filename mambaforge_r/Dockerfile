@@ -1,5 +1,5 @@
 # Let's try to maintain dockerfile here.
-# Last updated: 11/4/2022
+# Last updated: 11/6/2022
 
 FROM mambaorg/micromamba:1.0.0-jammy
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
@@ -39,6 +39,9 @@ RUN sudo apt-get update -y --no-install-recommends && \
   libcairo2-dev \
   # linear programming for igraph
   libglpk-dev \
+  # for systemfonts used in monocle3
+  libharfbuzz-dev \
+  libfribidi-dev \
   # geospatial for monocle3 and Seurat
   libpq-dev \
   gdal-bin \
