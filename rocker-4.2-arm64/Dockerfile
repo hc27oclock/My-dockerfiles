@@ -12,10 +12,9 @@ USER root
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   sudo \
-  git \
-  libgit2-dev \
   wget \
-  curl
+  curl \
+  libcurl-openssl-dev
 
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
@@ -33,7 +32,7 @@ ENV CRAN=https://packagemanager.rstudio.com/cran/__linux__/jammy/latest
 ENV LANG=en_US.UTF-8
 
 COPY scripts rocker_scripts
-RUN curl -s -o R4.2.2.tar.gz https://github.com/rocker-org/rocker-versioned2/archive/refs/tags/R4.2.2.tar.gz && \
+RUN curl -s -o R4.2.2.tar.gz http://github.com/rocker-org/rocker-versioned2/archive/refs/tags/R4.2.2.tar.gz && \
   tar zxvf R4.2.2.tar.gz
 
 RUN rocker-versioned2-R4.2.2/scripts/install_R_source.sh
