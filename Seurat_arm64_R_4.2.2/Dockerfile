@@ -7,7 +7,9 @@ LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 USER root
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
-  sudo
+  sudo \
+  wget \
+  gpg \
 
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
