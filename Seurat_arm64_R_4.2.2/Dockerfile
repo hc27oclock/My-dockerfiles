@@ -5,9 +5,11 @@ FROM ubuntu:jammy
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 USER root
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-  sudo
+RUN apt-get update -qq -y --no-install-recommends && \
+  apt-get install -qq -y --no-install-recommends \
+  sudo \
+  software-properties-common \
+  dirmngr
 
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
@@ -17,8 +19,11 @@ RUN useradd -m -d /home/${user} ${user} && \
 
 WORKDIR /home/${user}
 
-RUN apt-get update -y --no-install-recommends && \
-  apt-get install -y --no-install-recommends \
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+
+RUN apt-get update -qq -y --no-install-recommends && \
+  apt-get install -qq -y --no-install-recommends \
   r-base \
   r-cran-seurat && \
   sudo apt-get clean && \
