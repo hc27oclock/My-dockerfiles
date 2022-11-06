@@ -87,5 +87,4 @@ RUN conda init bash
 RUN echo "conda activate base" >> /home/${user}/.bashrc
 RUN conda clean -y --all
 
-USER choh
 CMD ["/bin/bash"]
