@@ -11,7 +11,11 @@ LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
 USER root
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
-  sudo
+  sudo \
+  git \
+  libgit2-dev \
+  wget \
+  curl
 
 ENV user choh
 RUN useradd -m -d /home/${user} ${user} && \
@@ -31,11 +35,11 @@ ENV LANG=en_US.UTF-8
 
 COPY scripts rocker_scripts
 
-RUN sudo wget -O rocker_scripts/install_R_source.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh && \
+RUN sudo wget -qO rocker_scripts/install_R_source.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_R_source.sh && \
   bash rocker_scripts/install_R_source.sh
-RUN sudo wget -O rocker_scripts/install_geospatial.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh && \
+RUN sudo wget -qO rocker_scripts/install_geospatial.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/install_geospatial.sh && \
   bash rocker_scripts/install_geospatial.sh
-RUN sudo wget -O rocker_scripts/setup_R.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh && \
+RUN sudo wget -qO rocker_scripts/setup_R.sh -c https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/setup_R.sh && \
   bash rocker_scripts/setup_R.sh
 
 RUN sudo apt-get update && \
