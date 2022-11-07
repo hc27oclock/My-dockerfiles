@@ -1,0 +1,14 @@
+name: pytorch
+channels:
+  - conda-forge
+  - bioconda
+  - pytorch
+  - defaults
+dependendies:
+  - python=3.10
+  - ipykernel=6.17.0
+  - igraph=0.11.2
+  - pytorch=1.13.0
+  - scanpy=0.9.1
+  - scvelo=0.2.5
+  - scvi-tools=0.19.0
