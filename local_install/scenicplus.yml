@@ -1,0 +1,8 @@
+name: scenicplus
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - scanpy=1.8.2
+prefix: /Users/choh/mambaforge/envs/scenicplus
