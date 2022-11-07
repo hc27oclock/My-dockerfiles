@@ -32,6 +32,6 @@ RUN sudo apt-get update -y && \
   r-base-core && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
-RUN R -e 'install.packages("Seurat")'
+RUN sudo R -e 'install.packages("Seurat")'
 
 CMD ["/bin/bash"]
