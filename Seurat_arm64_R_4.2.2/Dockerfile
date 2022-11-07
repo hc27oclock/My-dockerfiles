@@ -32,7 +32,7 @@ RUN apt-get upgrade -y && \
   r-cran-seurat && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
-RUN R -e 'devtools::install("Seurat")'
+RUN R -e 'install.packages("Seurat")'
 
 USER ${user}
 CMD ["/bin/bash"]
