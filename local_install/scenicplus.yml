@@ -5,5 +5,4 @@ channels:
   - defaults
 dependencies:
   - scanpy=1.8.2
-  - macs2=2.2.7.1
 prefix: /Users/choh/mambaforge/envs/scenicplus
