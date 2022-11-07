@@ -28,9 +28,11 @@ RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommen
 RUN apt-get upgrade -y && \
   apt-get install -y \
   r-base \
+  r-cran-devtools \
   r-cran-seurat && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
+RUN R -e 'devtools::install("Seurat")'
 
 USER ${user}
 CMD ["/bin/bash"]
