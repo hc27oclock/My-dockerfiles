@@ -29,7 +29,7 @@ RUN sudo apt-get update
 RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 RUN sudo apt-get update -y && \
   sudo apt-get install -y \
-  r-base-core && \
+  r-base && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 #RUN R -e 'install.packages("Seurat")'
