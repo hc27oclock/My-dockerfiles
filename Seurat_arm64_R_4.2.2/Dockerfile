@@ -27,9 +27,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-proj
 RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 RUN apt-get upgrade -y && \
   apt-get install -y \
-  r-base \
-  r-cran-devtools \
-  r-cran-seurat && \
+  r-base && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 RUN R -e 'install.packages("Seurat")'
