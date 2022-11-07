@@ -18,6 +18,7 @@ RUN useradd -m -d /home/${user} ${user} && \
   adduser ${user} sudo && \
   echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
+USER ${user}
 WORKDIR /home/${user}
 
 # GPG settings
@@ -25,12 +26,11 @@ RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc |
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
-RUN apt-get update -y && \
-  apt-get install -y \
+RUN sudo apt-get update -y && \
+  sudo apt-get install -y \
   r-base-core && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
 #RUN R -e 'install.packages("Seurat")'
 
-USER ${user}
 CMD ["/bin/bash"]
