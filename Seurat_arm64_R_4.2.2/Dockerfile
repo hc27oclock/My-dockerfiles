@@ -30,7 +30,7 @@ RUN apt-get upgrade -y && \
   r-base && \
   sudo apt-get clean && \
   sudo rm -rf /var/lib/apt/lists/*
-RUN R -e 'install.packages("Seurat")'
+#RUN R -e 'install.packages("Seurat")'
 
 USER ${user}
 CMD ["/bin/bash"]
