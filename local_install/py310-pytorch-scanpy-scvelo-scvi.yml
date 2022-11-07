@@ -4,7 +4,7 @@ channels:
   - bioconda
   - pytorch
   - defaults
-dependendies:
+dependencies:
   - python=3.10
   - ipykernel=6.17.0
   - igraph=0.11.2
