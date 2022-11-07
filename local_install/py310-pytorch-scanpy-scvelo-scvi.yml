@@ -2,14 +2,12 @@ name: pytorch
 channels:
   - conda-forge
   - bioconda
-  - pytorch
   - defaults
 dependencies:
   - python=3.10
   - pip=22.3.1
   - ipykernel=6.17.0
   - igraph=0.10.2
-  - pytorch=1.13.0=py3.10_0
   - scanpy=1.9.1
   - scvi-tools=0.19.0
   - multivelo=0.1.2
