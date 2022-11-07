@@ -4,5 +4,6 @@ channels:
   - bioconda
   - defaults
 dependencies:
+  - cython=0.29.32
   - scanpy=1.8.2
 prefix: /Users/choh/mambaforge/envs/scenicplus
