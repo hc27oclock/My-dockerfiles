@@ -9,12 +9,16 @@ LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 SHELL ["/bin/bash", "-c"]
 
 # install binary packages
+RUN yum install -y centos-release-scl
+RUN yum install -y devtoolset-7-gcc*
+RUN scl enable devtoolset-7 bash
 RUN yum install -y epel-release && \
   yum update -y && \
   yum group install -y "Development Tools" && \
   yum install -y \
   wget \
   which \
+  python-devel \
   nlopt-devel \
   readline-devel \
   libXt-devel \
