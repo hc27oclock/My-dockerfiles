@@ -21,6 +21,7 @@ RUN yum install -y epel-release && \
   bzip2-devel \
   zlib-devel \
   xz-devel \
+  cairo-devel \
   pcre2-devel \
   libcurl-devel \
   libxml2-devel \
