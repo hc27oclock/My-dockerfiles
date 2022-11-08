@@ -25,6 +25,7 @@ RUN yum install -y epel-release && \
   libxml2-devel \
   openssl-devel \
   fontconfig-devel \
+  nlopt-devel \
   harfbuzz-devel \
   fribidi-devel \
   freetype-devel \
