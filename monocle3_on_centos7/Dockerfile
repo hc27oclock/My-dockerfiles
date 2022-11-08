@@ -20,6 +20,7 @@ RUN yum install -y epel-release && \
   which \
   python-devel \
   nlopt-devel \
+  gtest-devel \
   readline-devel \
   libXt-devel \
   bzip2-devel \
