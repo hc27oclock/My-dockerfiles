@@ -6,7 +6,7 @@ FROM centos:centos7
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 # bash shell
-#SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-c"]
 
 # install binary packages
 RUN yum install -y epel-release && \
