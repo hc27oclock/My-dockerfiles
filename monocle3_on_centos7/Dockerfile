@@ -15,6 +15,7 @@ RUN yum install -y epel-release && \
   yum install -y \
   wget \
   which \
+  cmake \
   readline-devel \
   libXt-devel \
   bzip2-devel \
