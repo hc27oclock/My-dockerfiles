@@ -51,7 +51,30 @@ RUN wget -c https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.2
   ./configure && \
   make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
   make install && \
-  rm -f cmake-3.24.3.tar.gz
+  rm -f /work/cmake-3.24.3.tar.gz
+
+WORKDIR /work
+
+# prerequisite: compile sqlite
+RUN wget -c https://www.sqlite.org/2022/sqlite-autoconf-3390400.tar.gz && \
+  tar zxvf sqlite-autoconf-3390400.tar.gz && \
+  cd sqlite-autoconf-3390400 && \
+  ./configure && \
+  make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
+  make install && \
+  rm -f /work/sqlite-autoconf-3390400.tar.gz
+
+WORKDIR /work
+
+# prerequisite: compile proj
+RUN wget -c https://download.osgeo.org/proj/proj-9.1.0.tar.gz && \
+  tar zxvf proj-9.1.0.tar.gz && \
+  mkdir -p proj-9.1.0/build && \
+  cd proj-9.1.0/build && \
+  cmake .. && \
+  cmake --build -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) . && \
+  cmake --build . --target install && \
+  rm -f /work/proj-9.1.0.tar.gz
 
 WORKDIR /work
 
@@ -62,7 +85,7 @@ RUN wget -c https://github.com/OSGeo/gdal/releases/download/v3.5.3/gdal-3.5.3.ta
   ./configure && \
   make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
   make install && \
-  rm -f gdal-3.5.3.tar.gz
+  rm -f /work/gdal-3.5.3.tar.gz
 
 WORKDIR /work
 
