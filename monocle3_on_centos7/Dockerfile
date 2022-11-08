@@ -64,7 +64,7 @@ RUN R -e 'install.packages(c("devtools", "BiocManager", "grr"), repos="https://c
 RUN wget -c https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz && \
   R CMD INSTALL Matrix.utils_0.9.8.tar.gz && \
   rm -f /work/Matrix.utils_0.9.8.tar.gz
-RUN R -e 'BiocManager::install(c("Seurat"))
+RUN R -e 'BiocManager::install("Seurat")'
 RUN R -e 'BiocManager::install(c("BiocGenerics", "DelayedArray", "DelayedMatrixStats", "limma", "lme4", "S4Vectors", "SingleCellExperiment", "SummarizedExperiment", "batchelor", "HDF5Array", "terra", "ggrastr"))'
 RUN R -e 'devtools::install_github("cole-trapnell-lab/monocle3")'
 
