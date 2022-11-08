@@ -26,6 +26,7 @@ RUN yum install -y epel-release && \
   libcurl-devel \
   libxml2-devel \
   openssl-devel \
+  udunits2-devel \
   fontconfig-devel \
   harfbuzz-devel \
   fribidi-devel \
@@ -33,7 +34,9 @@ RUN yum install -y epel-release && \
   libpng-devel \
   libtiff-devel \
   libjpeg-turbo-devel \
-  gdal-devel
+  gdal-devel \
+  geos-devel \
+  proj-devel
 
 WORKDIR /work
 
