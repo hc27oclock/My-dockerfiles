@@ -66,6 +66,18 @@ RUN wget -c https://www.sqlite.org/2022/sqlite-autoconf-3390400.tar.gz && \
 
 WORKDIR /work
 
+# prerequisite: compile geos
+RUN wget -c https://download.osgeo.org/geos/geos-3.11.0.tar.bz2 && \
+  tar jxvf geos-3.11.0.tar.bz2 && \
+  mkdir -p geos-3.11.0/build && \
+  cd geos-3.11.0/build && \
+  cmake .. && \
+  cmake --build . -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
+  cmake --build . --target install && \
+  rm -f /work/geos-3.11.0.tar.bz2
+
+WORKDIR /work
+
 # prerequisite: compile proj
 RUN wget -c https://download.osgeo.org/proj/proj-9.1.0.tar.gz && \
   tar zxvf proj-9.1.0.tar.gz && \
