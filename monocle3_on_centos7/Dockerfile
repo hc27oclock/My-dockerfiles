@@ -55,6 +55,17 @@ RUN wget -c https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.2
 
 WORKDIR /work
 
+# prerequisite: compile python 3
+RUN wget -c https://www.python.org/ftp/python/3.10.8/Python-3.10.8.tgz && \
+  tar zxvf Python-3.10.8.tgz && \
+  cd Python-3.10.8 && \
+  ./configure && \
+  make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
+  make install && \
+  rm -f /work/Python-3.10.8.tgz
+
+WORKDIR /work
+
 # prerequisite: compile sqlite
 RUN wget -c https://www.sqlite.org/2022/sqlite-autoconf-3390400.tar.gz && \
   tar zxvf sqlite-autoconf-3390400.tar.gz && \
