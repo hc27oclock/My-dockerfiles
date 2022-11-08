@@ -45,7 +45,7 @@ RUN wget -c https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.2
   tar zxvf cmake-3.24.3.tar.gz && \
   cd cmake-3.24.3 && \
   ./configure && \
-  make && \
+  make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
   make install && \
   rm -f cmake-3.24.3.tar.gz
 
@@ -56,13 +56,14 @@ RUN wget -c https://cran.r-project.org/src/base/R-4/R-4.2.2.tar.gz && \
   tar zxvf R-4.2.2.tar.gz && \
   cd R-4.2.2 && \
   ./configure && \
-  make && \
+  make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
   make install && \
   rm -f /work/R-4.2.2.tar.gz
 
 WORKDIR /work
 
 # compile more packages on R
+RUN echo 'options(Ncpus=2 * parallel::detectCores())' >> /root/.Rprofile
 RUN R -e 'install.packages(c("devtools", "BiocManager", "grr"), repos="https://cloud.r-project.org")'
 RUN wget -c https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz && \
   R CMD INSTALL Matrix.utils_0.9.8.tar.gz && \
