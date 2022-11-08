@@ -63,6 +63,8 @@ RUN wget -c https://www.python.org/ftp/python/3.10.8/Python-3.10.8.tgz && \
   make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
   make install && \
   rm -f /work/Python-3.10.8.tgz
+RUN ln -fs /usr/local/bin/python3 /usr/bin/python && \
+  ln -fs /usr/local/bin/python3 /bin/python
 
 WORKDIR /work
 
