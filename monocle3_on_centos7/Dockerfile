@@ -72,7 +72,7 @@ RUN wget -c https://download.osgeo.org/proj/proj-9.1.0.tar.gz && \
   mkdir -p proj-9.1.0/build && \
   cd proj-9.1.0/build && \
   cmake .. && \
-  cmake --build -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) . && \
+  cmake --build . -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
   cmake --build . --target install && \
   rm -f /work/proj-9.1.0.tar.gz
 
