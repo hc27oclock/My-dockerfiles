@@ -15,7 +15,6 @@ RUN yum install -y epel-release && \
   yum install -y \
   wget \
   which \
-  cmake \
   nlopt-devel \
   readline-devel \
   libXt-devel \
@@ -34,6 +33,17 @@ RUN yum install -y epel-release && \
   libtiff-devel \
   libjpeg-turbo-devel \
   gdal-devel
+
+WORKDIR /work
+
+# prerequisite: compile cmake
+RUN wget -c https://github.com/Kitware/CMake/releases/download/v3.24.3/cmake-3.24.3.tar.gz && \
+  tar zxvf cmake-3.24.3.tar.gz && \
+  cd cmake-3.24.3 && \
+  ./configure && \
+  make && \
+  make install && \
+  rm -f cmake-3.24.3.tar.gz
 
 WORKDIR /work
 
