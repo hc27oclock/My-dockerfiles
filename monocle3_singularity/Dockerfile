@@ -73,7 +73,7 @@ RUN apt-get update -y --no-install-recommends && \
 
 # compile more packages on R
 RUN echo 'options(Ncpus=2 * parallel::detectCores())' >> /root/.Rprofile
-RUN R -e 'install.packages("grr", repos="https://cloud.r-project.org")'
+RUN R -e 'install.packages(c("BiocManager", "grr"), repos="https://cloud.r-project.org")'
 RUN wget -c https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz && \
   R CMD INSTALL Matrix.utils_0.9.8.tar.gz && \
   rm -f /work/Matrix.utils_0.9.8.tar.gz
