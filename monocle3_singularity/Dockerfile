@@ -48,11 +48,12 @@ RUN apt-get update -y --no-install-recommends && \
   build-essential \
   ca-certificates
 
+RUN micromamba install python=3.10 scanpy -c conda-forge --root-prefix=/opt/conda
+
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
-# The current /bin/R might conflict with /opt/conda/bin/R.
 RUN apt-get update -y --no-install-recommends && \
   apt-get install -y --no-install-recommends \
   r-base \
@@ -72,6 +73,5 @@ RUN apt-get update -y --no-install-recommends && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN micromamba install python=3.10 scanpy -c conda-forge
 
 CMD ["/bin/bash"]
