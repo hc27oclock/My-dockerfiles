@@ -49,16 +49,6 @@ RUN apt-get update -y --no-install-recommends && \
   ca-certificates
 
 WORKDIR /work
-# compile R
-RUN wget -c https://cran.r-project.org/src/base/R-4/R-4.2.2.tar.gz && \
-  tar zxvf R-4.2.2.tar.gz && \
-  cd R-4.2.2 && \
-  ./configure && \
-  make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
-  make install && \
-  rm -f /work/R-4.2.2.tar.gz
-
-WORKDIR /work
 # compile more packages on R
 RUN echo 'options(Ncpus=2 * parallel::detectCores())' >> /root/.Rprofile
 RUN R -e 'install.packages(c("devtools", "BiocManager", "grr"), repos="https://cloud.r-project.org")'
@@ -67,6 +57,5 @@ RUN wget -c https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.u
   rm -f /work/Matrix.utils_0.9.8.tar.gz
 RUN R -e 'BiocManager::install(c("BiocGenerics", "DelayedArray", "DelayedMatrixStats", "limma", "lme4", "S4Vectors", "SingleCellExperiment", "SummarizedExperiment", "batchelor", "HDF5Array", "terra", "ggrastr"))'
 RUN R -e 'devtools::install_github("cole-trapnell-lab/monocle3")'
-
 
 CMD ["/bin/bash"]
