@@ -24,6 +24,7 @@ RUN apt-get update -y --no-install-recommends && \
   bzip2 \
   gpg \
   gfortran \
+  libreadline-dev \
   libfontconfig1-dev \
   liblapack-dev \
   libopenblas-dev \
