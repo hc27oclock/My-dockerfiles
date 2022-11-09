@@ -17,7 +17,8 @@ WORKDIR /work
 
 RUN apt-get update -y --no-install-recommends && \
   apt-get upgrade -y --no-install-recommends && \
-  apt-get install -y --no-install-recommends \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+  tzdata \
   git \
   libgit2-dev \
   wget \
@@ -46,8 +47,6 @@ RUN apt-get update -y --no-install-recommends && \
   libudunits2-dev \
   build-essential \
   ca-certificates
-
-RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
