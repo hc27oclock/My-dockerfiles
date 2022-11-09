@@ -13,8 +13,6 @@ RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   sudo
 
-WORKDIR /work
-
 RUN apt-get update -y --no-install-recommends && \
   apt-get upgrade -y --no-install-recommends && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -48,29 +46,17 @@ RUN apt-get update -y --no-install-recommends && \
   build-essential \
   ca-certificates
 
-# GPG settings
-RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
+WORKDIR /work
+# compile R
+RUN wget -c https://cran.r-project.org/src/base/R-4/R-4.2.2.tar.gz && \
+  tar zxvf R-4.2.2.tar.gz && \
+  cd R-4.2.2 && \
+  ./configure && \
+  make -j $(( 2 * $(cat /proc/cpuinfo | egrep ^processor | wc -l) )) && \
+  make install && \
+  rm -f /work/R-4.2.2.tar.gz
 
-RUN apt-get update -y --no-install-recommends && \
-  apt-get install -y --no-install-recommends \
-  r-base \
-  r-cran-devtools \
-  r-cran-xml \
-  r-cran-openxlsx \
-  r-cran-tidyverse \
-  r-cran-rcurl \
-  r-cran-nloptr \
-  r-cran-ggrepel \
-  r-cran-pheatmap \
-  r-cran-seurat \
-  r-cran-biocmanager \
-  r-bioc-all \
-  r-bioc-bsgenome \
-  r-bioc-deseq2 && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-
+WORKDIR /work
 # compile more packages on R
 RUN echo 'options(Ncpus=2 * parallel::detectCores())' >> /root/.Rprofile
 RUN R -e 'install.packages(c("devtools", "BiocManager", "grr"), repos="https://cloud.r-project.org")'
