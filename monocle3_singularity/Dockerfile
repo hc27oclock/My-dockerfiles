@@ -49,9 +49,9 @@ RUN apt-get update -y --no-install-recommends && \
   ca-certificates
 
 COPY environment.yml environment.yml
-RUN micromamba update -n base -y --file ./environment.yml && \
-  conda init bash && \
-  conda clean -y --all
+RUN micromamba update -n base -y --file ./environment.yml
+RUN conda clean -y --all && \
+  conda init bash
 
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
