@@ -1,7 +1,7 @@
 # Let's try to maintain dockerfile here.
 # Last updated: 11/9/2022
 
-FROM mambaorg/micromamba:1.0.0-jammy
+FROM rocker/r-ver:4.2.2
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 # bash shell
@@ -48,9 +48,6 @@ RUN apt-get update -y --no-install-recommends && \
   build-essential \
   ca-certificates
 
-COPY environment.yml environment.yml
-RUN micromamba update -n base -y --file ./environment.yml
-
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
@@ -74,11 +71,13 @@ RUN apt-get update -y --no-install-recommends && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-
-#RUN conda clean -y --all
-#RUN conda init bash
-#RUN conda activate base
-
+# compile more packages on R
+RUN echo 'options(Ncpus=2 * parallel::detectCores())' >> /root/.Rprofile
+RUN wget -c https://cran.r-project.org/src/contrib/Archive/Matrix.utils/Matrix.utils_0.9.8.tar.gz && \
+  R CMD INSTALL Matrix.utils_0.9.8.tar.gz && \
+  rm -f /work/Matrix.utils_0.9.8.tar.gz
+RUN R -e 'BiocManager::install(c("BiocGenerics", "DelayedArray", "DelayedMatrixStats", "limma", "lme4", "S4Vectors", "SingleCellExperiment", "SummarizedExperiment", "batchelor", "HDF5Array", "terra", "ggrastr"))'
+RUN R -e 'devtools::install_github("cole-trapnell-lab/monocle3")'
 
 
 CMD ["/bin/bash"]
