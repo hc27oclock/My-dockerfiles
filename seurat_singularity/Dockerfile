@@ -1,0 +1,56 @@
+# Let's try to maintain dockerfile here.
+# Last updated: 11/9/2022
+
+FROM rocker/r-ver:4.2.2
+LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
+
+# bash shell
+SHELL ["/bin/bash", "-c"]
+
+# install sudo
+USER root
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  sudo
+
+RUN apt-get update -y --no-install-recommends && \
+  apt-get upgrade -y --no-install-recommends && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+  tzdata \
+  git \
+  libgit2-dev \
+  wget \
+  unzip \
+  bzip2 \
+  gpg \
+  gfortran \
+  libreadline-dev \
+  libbz2-dev \
+  libfontconfig1-dev \
+  liblapack-dev \
+  libopenblas-dev \
+  # for nloptr
+  libudunits2-dev \
+  cmake \
+  # for ggrastr
+  libxt-dev \
+  libcairo2-dev \
+  # linear programming for igraph
+  libglpk-dev \
+  # for systemfonts used in monocle3
+  libharfbuzz-dev \
+  libfribidi-dev \
+  # geospatial for monocle3 and Seurat
+  libpq-dev \
+  gdal-bin \
+  libgdal-dev \
+  libudunits2-dev \
+  build-essential \
+  ca-certificates
+
+WORKDIR /work
+# compile more packages on R
+RUN echo 'options(Ncpus=2 * parallel::detectCores())' >> /root/.Rprofile
+RUN R -e 'install.packages("Seurat", repos="https://cloud.r-project.org")'
+
+CMD ["/bin/bash"]
