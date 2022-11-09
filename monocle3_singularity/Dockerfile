@@ -1,7 +1,7 @@
 # Let's try to maintain dockerfile here.
 # Last updated: 11/9/2022
 
-FROM mambaorg/micromamba:1.0.0-focal
+FROM mambaorg/micromamba:1.0.0-jammy
 LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 
 # bash shell
@@ -50,12 +50,10 @@ RUN apt-get update -y --no-install-recommends && \
 
 COPY environment.yml environment.yml
 RUN micromamba update -n base -y --file ./environment.yml
-RUN conda clean -y --all && \
-  conda init bash
 
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
+RUN echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
 RUN apt-get update -y --no-install-recommends && \
   apt-get install -y --no-install-recommends \
@@ -77,8 +75,9 @@ RUN apt-get update -y --no-install-recommends && \
   rm -rf /var/lib/apt/lists/*
 
 
-
-RUN conda activate base
+#RUN conda clean -y --all
+#RUN conda init bash
+#RUN conda activate base
 
 
 
