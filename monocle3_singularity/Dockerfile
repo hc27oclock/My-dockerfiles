@@ -73,5 +73,13 @@ RUN apt-get update -y --no-install-recommends && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+COPY environment.yml environment.yml
+RUN micromamba update -n base -y --file ./environment.yml
+
+RUN conda init bash
+RUN conda clean -y --all
+RUN conda activate base
+
+
 
 CMD ["/bin/bash"]
