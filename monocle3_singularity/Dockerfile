@@ -48,7 +48,10 @@ RUN apt-get update -y --no-install-recommends && \
   build-essential \
   ca-certificates
 
-RUN micromamba install python=3.10 scanpy -c conda-forge --root-prefix=/opt/conda
+COPY environment.yml environment.yml
+RUN micromamba update -n base -y --file ./environment.yml && \
+  conda init bash && \
+  conda clean -y --all
 
 # GPG settings
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
@@ -73,11 +76,8 @@ RUN apt-get update -y --no-install-recommends && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-COPY environment.yml environment.yml
-RUN micromamba update -n base -y --file ./environment.yml
 
-RUN conda init bash
-RUN conda clean -y --all
+
 RUN conda activate base
 
 
