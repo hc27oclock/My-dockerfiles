@@ -1,0 +1,20 @@
+# Let's try to maintain dockerfile here.
+# Last updated: 11/11/2022
+
+FROM mambaorg/micromamba:1.0.0-jammy
+LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
+
+# bash shell
+SHELL ["/bin/bash", "-c"]
+
+USER root
+RUN apt-get update && \
+  apt-get install -y \
+  sudo
+
+WORKDIR /work
+
+COPY scripts/bowtie2.yml bowtie2.yml
+RUN micromamba update -n base -y --file ./bowtie2.yml
+
+CMD ["/bin/bash"]
