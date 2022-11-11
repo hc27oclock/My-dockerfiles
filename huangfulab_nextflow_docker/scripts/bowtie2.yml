@@ -1,0 +1,12 @@
+name: base
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10
+  - bowtie2=2.5.0
+  - star=2.7.10b
+  - samtools=1.16.1
+  - picard=2.27.4
+prefix: /opt/conda
