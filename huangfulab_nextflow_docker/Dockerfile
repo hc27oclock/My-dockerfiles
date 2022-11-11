@@ -8,7 +8,14 @@ LABEL maintainer "Hyunwoo Cho <hc27oclock@gmail.com>"
 SHELL ["/bin/bash", "-c"]
 
 USER root
-RUN apt-get install -y unattended-upgrades
+RUN apt-get update && \
+  apt-get install -y \
+  sudo
+
+WORKDIR /work
+
+COPY scripts/fastqc.yml fastqc.yml
+RUN micromamba update -n base -y --file ./fastqc.yml
 
 CMD ["/bin/bash"]
 
